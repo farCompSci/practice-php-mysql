@@ -23,7 +23,8 @@ then loop through the results with foreach.
 
 
 include("src/functions.php");
-
+  $db = dbConnect();
+  $rows = getNeighborhoods($db);
 ?>
 
 <!doctype html>
@@ -42,8 +43,24 @@ include("src/functions.php");
     <div class="container">
 
       <!-- display bulleted list here -->
-  
-
+      <ul>
+        <?php 
+          foreach($rows as $row){ // the first is the array and the row is the element that is the subscripted
+            $row_id = $row["id"];
+            $neighborhood_name = $row["neighborhood"];
+            echo "<li>$neighborhood_name, $row_id</li>";
+          }
+        ?>
+      </ul>
+      
+        <pre>
+          <code>
+            <?php 
+              // var_dump($rows); 
+            ?>
+          </pre>
+        </code>
+      
 
 
 

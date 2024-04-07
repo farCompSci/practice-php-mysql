@@ -27,7 +27,8 @@ neighborhood id. Call this function, and display the neighborhood name in the
 
 
 include("src/functions.php");
-
+$db = dbConnect();
+$rows = getNeighborhoods($db);
 ?>
 
 <!doctype html>
@@ -49,7 +50,7 @@ include("src/functions.php");
                 <a class="navbar-brand" href="index.php">Fake Airbnb</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!--
+                    
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
@@ -62,7 +63,7 @@ include("src/functions.php");
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-                    </ul>\-->
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -74,9 +75,14 @@ include("src/functions.php");
             <div class="row">
                 <div class="col-sm-8">
                     <select name="neighborhoodId">
-
-
-
+                        <option selected>Select One</option>
+                        <?php 
+                            foreach($rows as $row){ // the first is the array and the row is the element that is the subscripted
+                                $id = $row["id"];
+                                $name = $row["neighborhood"];
+                                echo "<option value=\"$id\">$name</option>";
+                            }
+                        ?>
                     </select>
 
                 </div>
@@ -97,7 +103,6 @@ include("src/functions.php");
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
   </body>
 </html>

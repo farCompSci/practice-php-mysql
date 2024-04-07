@@ -18,7 +18,31 @@ function dbConnect(){
     return $db;
 }
 
+function getNeighborhoods($db){
+    try {
+        $stmt = $db->prepare("select * from neighborhoods order by neighborhood ;");   
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    
+    }
+    catch (Exception $e) {
+        echo $e;
+    }
+    
+} 
 
+function getNeighborhoodsById($db,$id){
+    try{
+        $stmt = $db->prepare("select neighborhood from neighborhoods where id=$id;");
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    catch(Exception $e){
+        echo $e;
+    }
+}
 
 
 
